@@ -4,6 +4,8 @@ document.getElementById("play").addEventListener("click",function(){
     play();
 })
 
+const NUMERO_BOMBE = 16;
+
 // creo una funzione che conterrà tutto il procedimento
 
 function play(){
@@ -20,6 +22,7 @@ function play(){
     document.querySelector("main").innerHTML = "";
     // chiamo la funzione che genererà la griglia e le celle
     generatoreCella();
+    creaBombe();
 
     // creo le celle e il loro container
    function generatoreCella() {
@@ -48,10 +51,29 @@ function play(){
         this.classList.add("cliccata");
     }
 
-   //genero 16 numeri casuali nello stesso range della difficoltà impostata
+    //creo la funzione per generare le bombe e non rendere ripetibili i numeri 
+    function creaBombe() {
+        const listaBombe = [];
+        console.log("lista bombe",listaBombe);
+        for (let i = 0; i < NUMERO_BOMBE; i++) {
+            const bomba = numRandom(1, numeroCelle);
+            console.log("incremento", i);
+            if (listaBombe.includes(bomba)) {
+                i--;
+                console.log("decremento", i);
+            }else{
+                listaBombe.push(bomba);
+            }
+            console.log("bomba",bomba);
+        }
+    } 
 
 }
 
 
+//genero 16 numeri casuali nello stesso range della difficoltà impostata
+function numRandom(min, max) {
+    return Math.floor(Math.random() * (max - min +1) + min);
+}
 
 

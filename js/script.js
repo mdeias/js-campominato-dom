@@ -37,11 +37,18 @@ function play(){
           }else{
               cella.classList.add("crazy");
           }
+          cella.addEventListener("click",celleCliccate);
           console.log(cella);
           container.append(cella);
         }
         document.querySelector("main").append(container);
    }
+    //creo una funzione per aggiungere una classe alle celle cliccate
+    function celleCliccate(){
+        this.classList.add("cliccata");
+    }
+
+   //genero 16 numeri casuali nello stesso range della difficoltà impostata
 
 }
 

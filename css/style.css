@@ -78,3 +78,10 @@ footer p{
     height: calc(100% / 7);
 }
 
+.cella.cliccata{
+    background-color:darkblue;
+}
+
+.cella.bomba{
+    background-color: red;
+}

@@ -4,25 +4,33 @@ document.getElementById("play").addEventListener("click",function(){
     play();
 })
 
-const NUMERO_BOMBE = 16;
 
 // creo una funzione che conterrà tutto il procedimento
 
 function play(){
     const opzioni = 
    parseInt(document.getElementById("opzioni").value);
-    let numeroCelle = 100;
+    let numeroCelle = 0 ;
+    const NUMERO_BOMBE = 16;
     if (opzioni === 2) {
         numeroCelle = 81;
     }else if (opzioni === 3) {
         numeroCelle = 49;
+    }else{
+        numeroCelle = 100;
     }
-    console.log(numeroCelle);
+
     //resetto il main
     document.querySelector("main").innerHTML = "";
+
+    //richiamo le funzioni che generano bombe e celle
+    const listaBombe = creaBombe();
+    const celle = generatoreCella();
+   
+
     // chiamo la funzione che genererà la griglia e le celle
-    generatoreCella();
-    creaBombe();
+    // generatoreCella();
+    
 
     // creo le celle e il loro container
    function generatoreCella() {
@@ -40,16 +48,34 @@ function play(){
           }else{
               cella.classList.add("crazy");
           }
-          cella.addEventListener("click",celleCliccate);
+
+    //cerco il modo di confrontare l'array contenente le bombe con i numeri delle celle, ovviamente con scarsi risultati
+
+          cella.addEventListener("click", function click() {
+              
+              if (i === listaBombe) {
+                  cella.classList.add("bomba");
+                }else{
+                   cella.classList.add("cliccata");
+                }
+            })
+
           console.log(cella);
           container.append(cella);
+        }   
+        
+        document.querySelector("main").append(container);        
         }
-        document.querySelector("main").append(container);
-   }
+   
     //creo una funzione per aggiungere una classe alle celle cliccate
-    function celleCliccate(){
-        this.classList.add("cliccata");
-    }
+    // function celleCliccate(){
+    //     this.classList.add("cliccata");
+    // }
+
+    // function cellaBomba() {
+    //     this.classList.add("bomba");
+    // }
+   
 
     //creo la funzione per generare le bombe e non rendere ripetibili i numeri 
     function creaBombe() {
@@ -66,8 +92,9 @@ function play(){
             }
             console.log("bomba",bomba);
         }
-    } 
-
+        return listaBombe;
+    }
+   
 }
 
 
